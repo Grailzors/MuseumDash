@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     public List<GameObject> inventory;
 
     public static bool isGrabbing;
+    public static int keys;
 
     private float h;
     private bool isFalling;
@@ -28,9 +29,23 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        PlayerMove();   
+        PlayerMove(); 
+        
+        if (inventory.Count > 0)
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                PickUp obj = inventory[i].GetComponent<PickUp>();
+                //print(obj.pickupName + " " + obj.pickupNumCode + " " + obj.pickupType + " " + obj.pickupColor);
+            }
+        }
+
     }
 
+    private void LateUpdate()
+    {
+        PlayerInteract();
+    }
 
     private void OnDrawGizmos()
     {
@@ -61,11 +76,36 @@ public class PlayerController : MonoBehaviour {
 
     void PlayerInteract()
     {
-
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isGrabbing = true;
+        }
+        else
+        {
+            isGrabbing = false;
+        }
     }
 
     public void PlayerCollect(GameObject obj)
     {
-        inventory.Add(obj);
+        //Convert the enum to its int value for switch
+        int typeValue = (int)obj.GetComponent<PickUp>().pickupDetails.pickupType;
+        GameObject gm = GameObject.FindGameObjectWithTag("GM");
+
+        switch (typeValue)
+        {
+            case 2:
+                print("Got Box");
+                break;
+            case 1:
+                gm.GetComponent<GameManager>().treasureCollected.Add(obj);
+                inventory.Add(obj);
+                print("Collected: " + obj.GetComponent<PickUp>().pickupDetails.pickupName);
+                break;
+            case 0:
+                print("Collected: " + obj.GetComponent<PickUp>().pickupDetails.pickupName);
+                inventory.Add(obj);
+                break;
+        }
     }
 }

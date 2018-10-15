@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour {
 
-    public enum PickUpType {Key, Treasure, Create}
-    public enum PickUpColor { Red, Blue, Green, None}
-
-    [Header("PickUp Info")]
-    public PickUpType pickupType;
-    public PickUpColor pickupColor;
+    public PickUpData pickupDetails;
 
     private bool isCollected;
 
@@ -38,3 +33,17 @@ public class PickUp : MonoBehaviour {
     }
 
 }
+
+[System.Serializable]
+public class PickUpData
+{
+    public enum PickUpType { Key = 0, Treasure = 1, Create = 2 }
+    public enum PickUpColor { None = 0, Red = 1, Blue = 2, Green = 3 }
+
+    [Header("PickUp Details")]
+    public string pickupName = "";
+    public int pickupNumCode = 0;
+    public PickUpType pickupType;
+    public PickUpColor pickupColor;
+}
+
