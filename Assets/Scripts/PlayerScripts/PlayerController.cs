@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour {
             case 1:
                 gm.GetComponent<GameManager>().treasureCollected.Add(obj);
                 inventory.Add(obj);
+                obj.transform.SetParent(gm.transform);
                 print("Collected: " + obj.GetComponent<PickUp>().pickupDetails.pickupName);
                 break;
             case 0:

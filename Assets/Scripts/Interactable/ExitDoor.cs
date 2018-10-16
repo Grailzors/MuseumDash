@@ -28,6 +28,7 @@ public class ExitDoor : MonoBehaviour {
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -58,6 +59,7 @@ public class ExitDoor : MonoBehaviour {
         {
             print("All Keys Collected");
             gotKeys = true;
+            GameManager.LoadNextLevel();
         }
         else
         {
