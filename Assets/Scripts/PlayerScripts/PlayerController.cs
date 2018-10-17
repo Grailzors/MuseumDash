@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        PlayerMove(); 
-        
+        PlayerMove();
+
         if (inventory.Count > 0)
         {
             for (int i = 0; i < inventory.Count; i++)
@@ -54,6 +54,11 @@ public class PlayerController : MonoBehaviour {
         PlayerInteract();
     }
 
+    private void FixedUpdate()
+    {
+        //PlayerMove();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 1f, 1f, 0.4f);
@@ -64,12 +69,16 @@ public class PlayerController : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         isFalling = false;
+        //isJumping = false;
     }
 
 
     void PlayerMove()
     {
+        RaycastHit hit;
         h = Input.GetAxis("Horizontal");
+
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.yellow);
 
         //Player horizontal movement
         transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
@@ -80,34 +89,33 @@ public class PlayerController : MonoBehaviour {
             print("Jump");
             playerRb.AddForce(0f, initalJumpStrength * 100, 0f);
             isFalling = true;
+            isJumping = true;
         }
+
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = false;
+        }
+
 
         //Control the height of the jump while button is held down
-        if (Input.GetKey(KeyCode.Space) == true && maxedJump == false)
-        {
-            playerRb.AddForce(0f, addJumpStrength * 10, 0f);
-            jumpCounter += 1.5f * Time.deltaTime;
-            jumpCounter = Mathf.Clamp(jumpCounter, 0, maxJumpHeight);
-
-            print("ADDING FORCE UP");
-            print(maxedJump);
-
-            if (jumpCounter == maxJumpHeight)
+        //NOT WORKING WIERD FLOATY
+        if (Input.GetKey(KeyCode.Space) == true && isJumping == true)
+        {            
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, maxJumpHeight))
             {
-                maxedJump = true;
-
-                print("MAXED JUMP");
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.green);
+                playerRb.AddForce(0f, addJumpStrength * 10, 0f);
+                print("ADDING FORCE UP");
+            }
+            else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, maxJumpHeight * 1.1f))
+            {
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight * 1.1f, Color.red);
+                print("NOT HITTING");
+                isJumping = false;
             }
         }
-        else if (maxedJump == true && jumpCounter > 0)
-        {
-            jumpCounter -= 1.5f * Time.deltaTime;
-        }
-        else if (maxedJump == true && jumpCounter < 0)
-        {
-            maxedJump = false;
-        }
-
     }
 
     void PlayerInteract()
