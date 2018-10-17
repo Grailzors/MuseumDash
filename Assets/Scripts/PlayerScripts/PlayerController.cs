@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private float h;
     private float jumpCounter = 0f;
     private bool isFalling;
+    public bool isJumping;
     private bool maxedJump;
     private Rigidbody playerRb;
     
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     {
         isGrabbing = false;
         isFalling = true;
+        isJumping = false;
         maxedJump = false;
         playerRb = GetComponent<Rigidbody>();
     }
@@ -81,17 +83,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Control the height of the jump while button is held down
-        if (maxedJump == true && jumpCounter > 0)
+        if (Input.GetKey(KeyCode.Space) == true && maxedJump == false)
         {
-            jumpCounter -= 1.5f * Time.deltaTime;
-        }
-        else if (maxedJump == true && jumpCounter < 0)
-        {
-            maxedJump = false;
-        }
-        else if (Input.GetKey(KeyCode.Space) == true && maxedJump == false)
-        {
-            playerRb.AddForce(0f, addJumpStrength * 100, 0f);
+            playerRb.AddForce(0f, addJumpStrength * 10, 0f);
             jumpCounter += 1.5f * Time.deltaTime;
             jumpCounter = Mathf.Clamp(jumpCounter, 0, maxJumpHeight);
 
@@ -105,7 +99,14 @@ public class PlayerController : MonoBehaviour {
                 print("MAXED JUMP");
             }
         }
-
+        else if (maxedJump == true && jumpCounter > 0)
+        {
+            jumpCounter -= 1.5f * Time.deltaTime;
+        }
+        else if (maxedJump == true && jumpCounter < 0)
+        {
+            maxedJump = false;
+        }
 
     }
 
