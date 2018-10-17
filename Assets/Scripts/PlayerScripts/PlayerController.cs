@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Player Movement Controlls")]
     public float moveSpeed = 5f;
-    public float jumpStrength = 2f;
+    public float maxJumpHeight = 2f;
+    public float initalJumpStrength = 2f;
+    public float addJumpStrength = 1f;
 
     [Header("Player Data")]
     public List<GameObject> inventory;
@@ -15,7 +17,9 @@ public class PlayerController : MonoBehaviour {
     public static int keys;
 
     private float h;
+    private float jumpCounter = 0f;
     private bool isFalling;
+    private bool maxedJump;
     private Rigidbody playerRb;
     
 
@@ -23,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     {
         isGrabbing = false;
         isFalling = true;
+        maxedJump = false;
         playerRb = GetComponent<Rigidbody>();
     }
 
@@ -64,14 +69,44 @@ public class PlayerController : MonoBehaviour {
     {
         h = Input.GetAxis("Horizontal");
 
+        //Player horizontal movement
         transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
 
+        //Jump movement
         if (Input.GetKeyDown(KeyCode.Space) == true && isFalling == false)
         {
             print("Jump");
-            playerRb.AddForce(0f, jumpStrength, 0f);
+            playerRb.AddForce(0f, initalJumpStrength * 100, 0f);
             isFalling = true;
         }
+
+        //Control the height of the jump while button is held down
+        if (maxedJump == true && jumpCounter > 0)
+        {
+            jumpCounter -= 1.5f * Time.deltaTime;
+        }
+        else if (maxedJump == true && jumpCounter < 0)
+        {
+            maxedJump = false;
+        }
+        else if (Input.GetKey(KeyCode.Space) == true && maxedJump == false)
+        {
+            playerRb.AddForce(0f, addJumpStrength * 100, 0f);
+            jumpCounter += 1.5f * Time.deltaTime;
+            jumpCounter = Mathf.Clamp(jumpCounter, 0, maxJumpHeight);
+
+            print("ADDING FORCE UP");
+            print(maxedJump);
+
+            if (jumpCounter == maxJumpHeight)
+            {
+                maxedJump = true;
+
+                print("MAXED JUMP");
+            }
+        }
+
+
     }
 
     void PlayerInteract()
