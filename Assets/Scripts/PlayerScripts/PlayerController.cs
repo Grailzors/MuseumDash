@@ -14,23 +14,29 @@ public class PlayerController : MonoBehaviour {
     public List<GameObject> inventory;
 
     public static bool isGrabbing;
+    public static bool isCarrying;
     public static int keys;
 
-    private float h;
-    private bool isFalling;
     private Rigidbody rb;
+    private float h;
+    private bool isHolding;
+    private bool isJumping;
+    
     
 
     private void Start()
     {
         isGrabbing = false;
-        isFalling = true;
+        isCarrying = false;
+        isJumping = false;
         rb = GetComponent<Rigidbody>();
     }
 
     void Update ()
     {
         PlayerMove();
+
+        print(isCarrying);
 
         if (inventory.Count > 0)
         {
@@ -40,7 +46,6 @@ public class PlayerController : MonoBehaviour {
                 //print(obj.pickupName + " " + obj.pickupNumCode + " " + obj.pickupType + " " + obj.pickupColor);
             }
         }
-
     }
 
     private void LateUpdate()
@@ -54,12 +59,6 @@ public class PlayerController : MonoBehaviour {
         Gizmos.DrawCube(transform.GetChild(0).position, new Vector3(1, 1, 1));
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        isFalling = false;
-        //isJumping = false;
-    }
-
     void PlayerMove()
     {
         
@@ -68,13 +67,16 @@ public class PlayerController : MonoBehaviour {
         //Player horizontal movement
         transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
 
-        //Physics jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        //JUMPING
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             print("Jump");
             rb.AddForce(0f, initalJumpStrength * 100, 0f);
-            //isFalling = true;
-            //isJumping = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            isJumping = true;
         }
 
         if (rb.velocity.y < 0)
@@ -86,6 +88,10 @@ public class PlayerController : MonoBehaviour {
         else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y == 0)
+        {
+            isJumping = false;
         }
     }
 
@@ -104,7 +110,7 @@ public class PlayerController : MonoBehaviour {
     public void PlayerCollect(GameObject obj)
     {
         //Convert the enum to its int value for switch
-        int typeValue = (int)obj.GetComponent<PickUp>().pickupDetails.pickupType;
+        int typeValue = (int)obj.GetComponent<PickUp>().pickupDetails.pType;
         GameObject gm = GameObject.FindGameObjectWithTag("GM");
 
         switch (typeValue)
@@ -121,6 +127,8 @@ public class PlayerController : MonoBehaviour {
             case 0:
                 print("Collected: " + obj.GetComponent<PickUp>().pickupDetails.pickupName);
                 inventory.Add(obj);
+                break;
+            default:
                 break;
         }
     }
