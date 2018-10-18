@@ -240,8 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  maxJumpHeight: 1.8
   initalJumpStrength: 2
-  addJumpStrength: 1.5
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
   inventory: []
   isJumping: 0

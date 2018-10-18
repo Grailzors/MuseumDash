@@ -6,9 +6,15 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Player Movement Controlls")]
     public float moveSpeed = 5f;
-    public float maxJumpHeight = 2f;
     public float initalJumpStrength = 2f;
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+    
+    /*
+    public float maxJumpHeight = 2f;
+    
     public float addJumpStrength = 1f;
+    */
 
     [Header("Player Data")]
     public List<GameObject> inventory;
@@ -21,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     private bool isFalling;
     public bool isJumping;
     private bool maxedJump;
-    private Rigidbody playerRb;
+    private Rigidbody rb;
     
 
     private void Start()
@@ -30,10 +36,9 @@ public class PlayerController : MonoBehaviour {
         isFalling = true;
         isJumping = false;
         maxedJump = false;
-        playerRb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update ()
     {
         PlayerMove();
@@ -54,17 +59,11 @@ public class PlayerController : MonoBehaviour {
         PlayerInteract();
     }
 
-    private void FixedUpdate()
-    {
-        //PlayerMove();
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 1f, 1f, 0.4f);
         Gizmos.DrawCube(transform.GetChild(0).position, new Vector3(1, 1, 1));
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -72,18 +71,40 @@ public class PlayerController : MonoBehaviour {
         //isJumping = false;
     }
 
-
     void PlayerMove()
     {
-        RaycastHit hit;
+        
         h = Input.GetAxis("Horizontal");
-
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.yellow);
 
         //Player horizontal movement
         transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
 
-        //Jump movement
+        //Physics jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            print("Jump");
+            rb.AddForce(0f, initalJumpStrength * 100, 0f);
+            //isFalling = true;
+            //isJumping = true;
+        }
+
+        if (rb.velocity.y < 0)
+        {
+            //(fallMultiplier - 1) this is minus 1 to mimic how unity is all ready applying physics to 
+            //an object
+            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        {
+            rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+
+
+        //RAYCAST JUMP MOVEMENT
+        /*
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.yellow);
+
         if (Input.GetKeyDown(KeyCode.Space) == true && isFalling == false)
         {
             print("Jump");
@@ -92,30 +113,30 @@ public class PlayerController : MonoBehaviour {
             isJumping = true;
         }
 
-
         if (Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
         }
 
-
         //Control the height of the jump while button is held down
         //NOT WORKING WIERD FLOATY
         if (Input.GetKey(KeyCode.Space) == true && isJumping == true)
-        {            
+        {
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, maxJumpHeight))
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.green);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * hit.distance, Color.blue);
                 playerRb.AddForce(0f, addJumpStrength * 10, 0f);
                 print("ADDING FORCE UP");
             }
-            else if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, maxJumpHeight * 1.1f))
+            else
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight * 1.1f, Color.red);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.down) * maxJumpHeight, Color.red);
                 print("NOT HITTING");
-                isJumping = false;
+                //isJumping = false;
             }
         }
+        */
     }
 
     void PlayerInteract()
