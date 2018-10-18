@@ -6,11 +6,17 @@ public class PickUp : MonoBehaviour {
 
     public PickUpData pickupDetails;
 
-    private bool isCollected;
+    private GameObject player;
+    private Vector3 offset;
 
     private void Start()
     {
-        isCollected = false;
+        offset = transform.position - (transform.position + new Vector3(-1f, -1f, 0f));
+    }
+
+    private void Update()
+    {
+        CarryCreate();
     }
 
     private void OnDrawGizmos()
@@ -21,17 +27,38 @@ public class PickUp : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && PlayerController.isGrabbing == true)
+        if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType != PickUpData.PickUpType.Create)
         {
-            isCollected = true;
             GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
 
             other.gameObject.GetComponent<PlayerController>().PlayerCollect(gameObject);
-
         }
+        
+        if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && !PlayerController.isCarrying)
+        {
+            player = other.gameObject;
+            //offset = transform.position - other.transform.position;
+            PlayerController.isCarrying = true;
+        }
+        else if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && PlayerController.isCarrying)
+        {
+            PlayerController.isCarrying = false;
+        }
+        
     }
 
+    void CarryCreate()
+    {
+        if (PlayerController.isCarrying)
+        {
+            transform.position = player.transform.position + offset;
+        }
+        else if (!PlayerController.isCarrying)
+        {
+            transform.position = transform.position;
+        }
+    }
 }
 
 [System.Serializable]
@@ -43,7 +70,7 @@ public class PickUpData
     [Header("PickUp Details")]
     public string pickupName = "";
     public int pickupNumCode = 0;
-    public PickUpType pickupType;
-    public PickUpColor pickupColor;
+    public PickUpType pType;
+    public PickUpColor pColor;
 }
 
