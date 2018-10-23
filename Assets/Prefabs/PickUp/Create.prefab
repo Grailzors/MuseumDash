@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114830044472059668}
   - component: {fileID: 65019796362663620}
   - component: {fileID: 54012252610334724}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Create
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 33300419911820164}
   - component: {fileID: 23450554135109958}
   - component: {fileID: 65798886108711370}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

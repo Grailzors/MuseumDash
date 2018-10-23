@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4752472765372392}
   - component: {fileID: 33890266802045996}
   - component: {fileID: 23069770300058752}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4881822689208158}
   - component: {fileID: 114327896358198054}
   - component: {fileID: 65014123488894398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Treasure
   m_TagString: PickUp
   m_Icon: {fileID: 0}

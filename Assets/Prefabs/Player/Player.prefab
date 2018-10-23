@@ -239,8 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d908cb5ee99ba4a9bd633170de617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yOffset: 0.5
   moveSpeed: 5
   initalJumpStrength: 4.2
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   inventory: []
+  isJumping: 0
