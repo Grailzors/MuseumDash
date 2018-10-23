@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114344708335076348}
   - component: {fileID: 54376915556588474}
   - component: {fileID: 65390599296989558}
+  - component: {fileID: 114512817961792488}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -239,10 +240,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d908cb5ee99ba4a9bd633170de617d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 0.5
+  castPointOffset: 0.5
+  rayMaxDistance: 0.7
   moveSpeed: 5
   initalJumpStrength: 4.2
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   inventory: []
   isJumping: 0
+--- !u!114 &114512817961792488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458922225626030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1d3080aac616f34e8c2ba32878b1db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
