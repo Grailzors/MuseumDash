@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    [Header("RayCast Controllers")]
+    public float castPointOffset = 0.5f;
+    public float rayMaxDistance = 0.7f;
+
     [Header("Player Movement Controlls")]
     public float moveSpeed = 5f;
     public float initalJumpStrength = 2f;
@@ -19,10 +23,15 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rb;
     private float h;
-    private bool isHolding;
-    private bool isJumping;
-    
-    
+    public bool isJumping;
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 1f, 1f, 0.4f);
+        Gizmos.DrawCube(transform.GetChild(0).position, new Vector3(1, 1, 1));
+    }
+
 
     private void Start()
     {
@@ -34,9 +43,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update ()
     {
-        PlayerMove();
-
-        print(isCarrying);
+        //print(isCarrying);
 
         if (inventory.Count > 0)
         {
@@ -53,15 +60,14 @@ public class PlayerController : MonoBehaviour {
         PlayerInteract();
     }
 
-    private void OnDrawGizmos()
+    private void FixedUpdate()
     {
-        Gizmos.color = new Color(1f, 1f, 1f, 0.4f);
-        Gizmos.DrawCube(transform.GetChild(0).position, new Vector3(1, 1, 1));
+        CheckPlayerJumping();
+        PlayerMove();
     }
 
     void PlayerMove()
     {
-        
         h = Input.GetAxis("Horizontal");
 
         //Player horizontal movement
@@ -74,11 +80,6 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(0f, initalJumpStrength * 100, 0f);
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            isJumping = true;
-        }
-
         if (rb.velocity.y < 0)
         {
             //(fallMultiplier - 1) this is minus 1 to mimic how unity is all ready applying physics to 
@@ -89,9 +90,26 @@ public class PlayerController : MonoBehaviour {
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y == 0)
+    }
+
+    void CheckPlayerJumping()
+    {
+        int mask = 1 << 9;
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask))
         {
+            Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
+            //print("Hit");
+
             isJumping = false;
+        }
+        else if (!Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask))
+        {
+            Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
+            //print("Jumping");
+
+            isJumping = true;
         }
     }
 
