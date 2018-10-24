@@ -96,15 +96,17 @@ public class PlayerController : MonoBehaviour {
     {
         int mask = 1 << 9;
         RaycastHit hit;
+        bool rayCast = Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask);
 
-        if (Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask))
+
+        if (rayCast)
         {
             Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
             //print("Hit");
 
             isJumping = false;
         }
-        else if (!Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask))
+        else if (!rayCast)
         {
             Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
             //print("Jumping");
