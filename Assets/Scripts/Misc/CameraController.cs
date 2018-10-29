@@ -9,5 +9,4 @@ public class CameraController : MonoBehaviour {
     {
         GetComponent<CinemachineVirtualCamera>().Follow = GameObject.FindGameObjectWithTag("Player").transform;
 	}
-
 }
