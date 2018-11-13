@@ -71,7 +71,9 @@ public class PlayerController : MonoBehaviour {
         h = Input.GetAxis("Horizontal");
 
         //Player horizontal movement
-        transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
+        //transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
+        rb.MovePosition(transform.position + new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f));
+
 
         //JUMPING
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
