@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     [Header("RayCast Controllers")]
-    public float castPointOffset = 0.5f;
-    public float rayMaxDistance = 0.7f;
+    public float rayOffset = 1.1f;
+    public float maxDistance = 0.5f;
 
     [Header("Player Movement Controlls")]
     public float moveSpeed = 5f;
@@ -22,14 +22,40 @@ public class PlayerController : MonoBehaviour {
     public static int keys;
 
     private Rigidbody rb;
+    private Vector3 pos;
+    private RaycastHit hit;
     private float h;
-    public bool isJumping;
+    private bool hitDetect;
+    [SerializeField]
+    private bool isJumping;
 
 
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1f, 1f, 1f, 0.4f);
         Gizmos.DrawCube(transform.GetChild(0).position, new Vector3(1, 1, 1));
+
+        Gizmos.color = Color.red;
+
+        //Check if there has been a hit yet
+        if (hitDetect)
+        {
+            Gizmos.color = Color.green;
+
+            //Draw a Ray forward from GameObject toward the hit
+            Gizmos.DrawRay(pos, transform.up * -1 * hit.distance);
+            //Draw a cube that extends to where the hit exists
+            Gizmos.DrawWireCube(pos + transform.up * -1 * hit.distance, transform.localScale);
+        }
+        //If there hasn't been a hit yet, draw the ray at the maximum distance
+        else
+        {
+            //Draw a Ray forward from GameObject toward the maximum distance
+            Gizmos.DrawRay(pos, transform.up * -1 * maxDistance);
+            //Draw a cube at the maximum distance
+            Gizmos.DrawWireCube(pos + transform.up * -1 * maxDistance, transform.localScale);
+        }
+
     }
 
 
@@ -78,7 +104,7 @@ public class PlayerController : MonoBehaviour {
         //JUMPING
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
-            print("Jump");
+            //print("Jump");
             rb.AddForce(0f, initalJumpStrength * 100, 0f);
         }
 
@@ -97,23 +123,20 @@ public class PlayerController : MonoBehaviour {
     void CheckPlayerJumping()
     {
         int mask = 1 << 9;
-        RaycastHit hit;
-        bool rayCast = Physics.Raycast(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down), out hit, rayMaxDistance, mask);
+        Vector3 dir = transform.up * -1;
+        pos = transform.position + new Vector3(0f, rayOffset, 0f);
 
+        hitDetect = Physics.BoxCast(pos, transform.localScale, dir, out hit, transform.rotation, maxDistance, mask);
 
-        if (rayCast)
+        if (hitDetect)
         {
-            Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
-            //print("Hit");
-
             isJumping = false;
+            Debug.Log("Grounded : " + hit.collider.name);
         }
-        else if (!rayCast)
+        else
         {
-            Debug.DrawRay(transform.position + Vector3.up * castPointOffset, transform.TransformDirection(Vector3.down) * hit.distance, Color.red);
-            //print("Jumping");
-
             isJumping = true;
+            Debug.Log("Jumping");
         }
     }
 
