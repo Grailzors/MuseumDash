@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     [Header("RayCast Controllers")]
     public float rayOffset = 1.1f;
     public float maxDistance = 0.5f;
+    public float boxWidth = 1f;
 
     [Header("Player Movement Controlls")]
     public float moveSpeed = 5f;
@@ -58,7 +59,6 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-
     private void Start()
     {
         isGrabbing = false;
@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour {
         //transform.position += new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f);
         rb.MovePosition(transform.position + new Vector3((h * Time.deltaTime) * moveSpeed, 0f, 0f));
 
-
         //JUMPING
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
@@ -131,12 +130,12 @@ public class PlayerController : MonoBehaviour {
         if (hitDetect)
         {
             isJumping = false;
-            Debug.Log("Grounded : " + hit.collider.name);
+            //Debug.Log("Grounded : " + hit.collider.name);
         }
         else
         {
             isJumping = true;
-            Debug.Log("Jumping");
+            //Debug.Log("Jumping");
         }
     }
 
