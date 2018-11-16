@@ -6,4 +6,6 @@ using UnityEngine;
 public class LevelDescription : ScriptableObject {
 
     public float timeLimit;
+    public string[] dialouge;
+    public string[] npcDialouge;
 }

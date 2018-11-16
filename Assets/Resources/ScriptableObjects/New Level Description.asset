@@ -9,6 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5827370b70b16ec428631eea98a53c12, type: 3}
-  m_Name: TempLevel1
+  m_Name: New Level Description
   m_EditorClassIdentifier: 
-  timeLimit: 1.5
+  timeLimit: 0
+  dialouge: []
