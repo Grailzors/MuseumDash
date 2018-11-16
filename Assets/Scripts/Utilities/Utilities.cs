@@ -42,6 +42,7 @@ public class Utilities : MonoBehaviour {
             { "Textures", root + "Resources/Textures" },
             { "Fonts", root + "Resources/Fonts" },
             { "Sprites", root + "Resources/Sprites" },
+            { "ScriptableObjects", root + "Resources/ScriptableObjects" },
         };
 
         return pathDict;
@@ -153,6 +154,16 @@ public class Utilities : MonoBehaviour {
         {
             Directory.CreateDirectory(ProjectPaths()["Sprites"]);
             System.IO.File.WriteAllText(ProjectPaths()["Sprites"] + "/placeholder.txt", " ");
+        }
+    }
+
+    [MenuItem("Assets/Matt Utils/Create Directory/ScriptableObjects", false, 111)]
+    static void ScriptableObjectsDirectory()
+    {
+        if (!Directory.Exists(ProjectPaths()["ScriptableObjects"]))
+        {
+            Directory.CreateDirectory(ProjectPaths()["ScriptableObjects"]);
+            System.IO.File.WriteAllText(ProjectPaths()["ScriptableObjects"] + "/placeholder.txt", " ");
         }
     }
 

@@ -42,7 +42,6 @@ public class ExitDoor : MonoBehaviour {
     {
         List<GameObject> inv = other.gameObject.GetComponent<PlayerController>().inventory;
         int num = 0;
-
         
         for (int i = 0; i < requiredKeys.Count; i++)
         {

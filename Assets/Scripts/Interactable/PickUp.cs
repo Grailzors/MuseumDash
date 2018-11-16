@@ -6,7 +6,7 @@ public class PickUp : MonoBehaviour {
 
     public PickUpData pickupDetails;
 
-    private GameObject player;
+    private readonly GameObject player;
     private Vector3 offset;
 
     private void Start()
@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour {
 
     private void Update()
     {
-        CarryCreate();
+        //CarryCreate();
     }
 
     private void OnDrawGizmos()
@@ -27,7 +27,8 @@ public class PickUp : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType != PickUpData.PickUpType.Create)
+        //Pick Up item for inventory
+        if (other.tag == "Player" && PlayerController.isGrabbing) //&& pickupDetails.pType != PickUpData.PickUpType.Create)
         {
             GetComponent<BoxCollider>().enabled = false;
             transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
@@ -35,19 +36,21 @@ public class PickUp : MonoBehaviour {
             other.gameObject.GetComponent<PlayerController>().PlayerCollect(gameObject);
         }
         
+        /*
+        //Pick up item for carrying
         if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && !PlayerController.isCarrying)
         {
             player = other.gameObject;
-            //offset = transform.position - other.transform.position;
             PlayerController.isCarrying = true;
         }
         else if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && PlayerController.isCarrying)
         {
             PlayerController.isCarrying = false;
-        }
-        
+        } 
+        */
     }
 
+    /*
     void CarryCreate()
     {
         if (PlayerController.isCarrying)
@@ -59,12 +62,13 @@ public class PickUp : MonoBehaviour {
             transform.position = transform.position;
         }
     }
+    */
 }
 
 [System.Serializable]
 public class PickUpData
 {
-    public enum PickUpType { Key = 0, Treasure = 1, Create = 2 }
+    public enum PickUpType { Key = 0, Treasure = 1 }
     public enum PickUpColor { None = 0, Red = 1, Blue = 2, Green = 3 }
 
     [Header("PickUp Details")]

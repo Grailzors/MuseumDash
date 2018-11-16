@@ -230,6 +230,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1429057167 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1034599522807550, guid: ce48614e66a30dd4798b3323b9a2b78f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1934041107}
+--- !u!114 &1429057168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1429057167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d94a9344f282b41b35d937432de0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ld: {fileID: 11400000, guid: 79751818004f0e74992184e8c4798956, type: 2}
+  timeLimit: 0
 --- !u!60 &1479842639 stripped
 PolygonCollider2D:
   m_PrefabParentObject: {fileID: 60786880066139758, guid: d3c017517acfd4f44b95f690bf904ab1,
