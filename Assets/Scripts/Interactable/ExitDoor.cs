@@ -58,6 +58,7 @@ public class ExitDoor : MonoBehaviour {
         {
             print("All Keys Collected");
             gotKeys = true;
+            LevelManger.complete = true;
             GameManager.LoadNextLevel();
         }
         else

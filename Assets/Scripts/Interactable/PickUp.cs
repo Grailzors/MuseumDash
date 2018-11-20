@@ -35,34 +35,7 @@ public class PickUp : MonoBehaviour {
 
             other.gameObject.GetComponent<PlayerController>().PlayerCollect(gameObject);
         }
-        
-        /*
-        //Pick up item for carrying
-        if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && !PlayerController.isCarrying)
-        {
-            player = other.gameObject;
-            PlayerController.isCarrying = true;
-        }
-        else if (other.tag == "Player" && PlayerController.isGrabbing && pickupDetails.pType == PickUpData.PickUpType.Create && PlayerController.isCarrying)
-        {
-            PlayerController.isCarrying = false;
-        } 
-        */
     }
-
-    /*
-    void CarryCreate()
-    {
-        if (PlayerController.isCarrying)
-        {
-            transform.position = player.transform.position + offset;
-        }
-        else if (!PlayerController.isCarrying)
-        {
-            transform.position = transform.position;
-        }
-    }
-    */
 }
 
 [System.Serializable]

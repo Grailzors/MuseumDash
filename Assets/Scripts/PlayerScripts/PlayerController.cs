@@ -59,12 +59,18 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         isGrabbing = false;
         isCarrying = false;
         isJumping = false;
         rb = GetComponent<Rigidbody>();
+        //ResetPlayer();
     }
 
     void Update ()
@@ -84,6 +90,7 @@ public class PlayerController : MonoBehaviour {
     private void LateUpdate()
     {
         PlayerInteract();
+        //ResetPlayer();
     }
 
     private void FixedUpdate()
@@ -176,4 +183,16 @@ public class PlayerController : MonoBehaviour {
                 break;
         }
     }
+
+    void ResetPlayer()
+    {
+        if (LevelManger.complete)
+        {
+            transform.position = GameObject.FindGameObjectWithTag("LevelManger").GetComponent<LevelManger>().startPos.position;
+            rb.velocity = new Vector3();
+            inventory = new List<GameObject>();
+            LevelManger.complete = false;
+        }
+    }
+    
 }

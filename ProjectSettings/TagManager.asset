@@ -8,6 +8,7 @@ TagManager:
   - GM
   - StartPos
   - PressureItem
+  - LevelManger
   layers:
   - Default
   - TransparentFX

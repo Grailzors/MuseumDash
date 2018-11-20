@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class Utilities : MonoBehaviour {
 
@@ -168,4 +169,9 @@ public class Utilities : MonoBehaviour {
     }
 
     //Other functions to come
+    [MenuItem("Matt Utils/DebugTools/Print Current Scene %q", false, 0)]
+    static void PrintCurrentScene()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+    }
 }

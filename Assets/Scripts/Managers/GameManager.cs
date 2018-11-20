@@ -21,24 +21,19 @@ public class GameManager : MonoBehaviour {
     {
         LoadNextLevel();
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(mainCam);
-    }    
-
-    public static void LoadNextLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    private void OnLevelWasLoaded(int level)
+    private void Start()
     {
-        Vector3 startPos = GameObject.FindGameObjectWithTag("StartPos").transform.position;
-        InstantiatePlayer(startPos);
         Instantiate(mainCam, new Vector3(0f, 0f, -3f), Quaternion.identity);
     }
 
-    void InstantiatePlayer(Vector3 startPos)
+    public static void LoadNextLevel()
     {
-        print("Creating Player");
-        Instantiate(player, startPos, Quaternion.identity);
+        Object.Destroy(GameObject.FindGameObjectWithTag("Player"));
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("TestUI", LoadSceneMode.Additive);
+
     }
 }
