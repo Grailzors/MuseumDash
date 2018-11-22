@@ -112,6 +112,8 @@ public class PlayerController : MonoBehaviour {
         {
             //print("Jump");
             rb.AddForce(0f, initalJumpStrength * 100, 0f);
+
+            //print(rb.velocity.magnitude);
         }
 
         if (rb.velocity.y < 0)
@@ -184,6 +186,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /*
     void ResetPlayer()
     {
         if (LevelManger.complete)
@@ -194,5 +197,5 @@ public class PlayerController : MonoBehaviour {
             LevelManger.complete = false;
         }
     }
-    
+    */
 }

@@ -11,7 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5827370b70b16ec428631eea98a53c12, type: 3}
   m_Name: TestLevel2
   m_EditorClassIdentifier: 
-  timeLimit: 2.5
+  player: {fileID: 1458922225626030, guid: 4ddbb63413f741f469fb10d34da1deb8, type: 2}
+  mainCam: {fileID: 20526528682149392, guid: b456c2911a70db1459d6ccafe417c248, type: 2}
+  timeLimit:
+    min: 0
+    sec: 20
   dialogue:
   - name: Narrator
     dialogue: Some More Testing...
@@ -19,3 +23,4 @@ MonoBehaviour:
     dialogue: .. HURH URHURHURHUR HURHRU H RUR H...
   - name: Matt P
     dialogue: I have finaly lost my mind
+  camSize: 5

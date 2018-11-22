@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    public static int camSize;
+
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
 }

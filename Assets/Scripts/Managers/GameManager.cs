@@ -23,11 +23,6 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        Instantiate(mainCam, new Vector3(0f, 0f, -3f), Quaternion.identity);
-    }
-
     public static void LoadNextLevel()
     {
         Object.Destroy(GameObject.FindGameObjectWithTag("Player"));

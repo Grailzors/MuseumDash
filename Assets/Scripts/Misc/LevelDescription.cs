@@ -5,9 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Level Description", menuName = "Level Description")]
 public class LevelDescription : ScriptableObject {
 
+    [Header("Components")]
     public GameObject player;
+    public Camera mainCam;
+
+    [Header("Game Controls")]
     public TimeLimit timeLimit;
     public Dialogue[] dialogue;
+
+    [Header("Camera Controls")]
+    public int camSize;
 }
 
 
