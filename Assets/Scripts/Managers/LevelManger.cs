@@ -33,56 +33,10 @@ public class LevelManger : MonoBehaviour
         dialogue = ld.dialogue;
         player = ld.player;
         mainCam = ld.mainCam;
-
         mainCam.orthographicSize = ld.camSize;
+        DialogueBoxController.dialogueNum = -1;
 
         Instantiate(mainCam, new Vector3(0f, 0f, -3f), Quaternion.identity);
         Instantiate(player, startPos.position, Quaternion.identity);
     }
-
-
-    private void LateUpdate()
-    {
-        
-    }
-
-    void FailedLevel()
-    {
-        //Here reload the same level again so its all reset 
-    }
-
-
-    /*
-    //Working but I want to moive this to being an event based system 
-    //so its not updating every frame
-    private void LateUpdate()
-    {
-        CountDown();
-    }
-
-    void CountDown()
-    {
-        if (timeLimit < 2.5f)
-        {
-            timeLimit -= (countDownSpeed * Time.deltaTime) / 3.5f;
-        }
-        else
-        {
-            timeLimit -= countDownSpeed * Time.deltaTime;
-        }
-
-        //timeLimit -= countDownSpeed * Time.deltaTime;
-        timeLimit = Mathf.Clamp(timeLimit, 0f, origTimeLimit);
-
-        if (timeLimit == 0)
-        {
-            faild = true;
-        }
-
-        float sec = (float)(timeLimit % 60);
-        int min = (int)(timeLimit / 60) % 60;
-
-        timerText = string.Format("{1}.{0:0.00}",sec, min);
-    }
-    */
 }

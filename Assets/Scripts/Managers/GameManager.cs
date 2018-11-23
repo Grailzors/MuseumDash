@@ -29,6 +29,5 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene("TestUI", LoadSceneMode.Additive);
-
     }
 }

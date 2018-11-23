@@ -15,12 +15,15 @@ public class LeaverController : MonoBehaviour {
     //Remove for build
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.gray;
+        Gizmos.color = Color.cyan;
 
         for (int i = 0; i < trigger.GetPersistentEventCount(); i++)
         {
             GameObject obj = GameObject.Find(trigger.GetPersistentTarget(i).name);
-            Gizmos.DrawLine(transform.position, obj.transform.position);
+            if (obj != null)
+            {
+                Gizmos.DrawLine(transform.position, obj.transform.position);
+            }
         }
     }
 

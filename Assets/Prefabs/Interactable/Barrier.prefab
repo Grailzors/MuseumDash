@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4339380913117308}
-  - component: {fileID: 114539170870452056}
   - component: {fileID: 65406449424639788}
+  - component: {fileID: 114501633628424790}
   m_Layer: 0
   m_Name: Barrier
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1108636756173078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.259, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -141,7 +141,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2, z: 1}
   m_Center: {x: 0, y: 0.6, z: 0}
---- !u!114 &114539170870452056
+--- !u!114 &114501633628424790
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -149,7 +149,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1108636756173078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4f09d92dbe622441b9564664b5f8edd, type: 3}
+  m_Script: {fileID: 11500000, guid: 02b49ef326b3f2345b8cc79f0b05b7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   geo: {fileID: 1636723465815910}
+  inputNum: 0
+  switcher: {fileID: 0}
+  isSwitch: 0

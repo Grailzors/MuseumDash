@@ -111,9 +111,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             //print("Jump");
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
             rb.AddForce(0f, initalJumpStrength * 100, 0f);
-
-            //print(rb.velocity.magnitude);
         }
 
         if (rb.velocity.y < 0)

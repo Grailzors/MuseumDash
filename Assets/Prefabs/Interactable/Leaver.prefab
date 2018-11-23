@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4342907401625416}
   - component: {fileID: 114344926509587194}
   - component: {fileID: 212931948644974362}
+  - component: {fileID: 65692145612527476}
   m_Layer: 0
   m_Name: Leaver
   m_TagString: Untagged
@@ -34,13 +35,25 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1046906655352426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8, y: -1.245, z: 0}
   m_LocalScale: {x: 0.36807483, y: 0.36807486, z: 0.36807486}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65692145612527476
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046906655352426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7200003, y: 2.6800003, z: 0.20000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114344926509587194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -56,7 +69,18 @@ MonoBehaviour:
   onSprite: {fileID: 21300004, guid: 71e1c7764a936fb4aa90477a6c8c7e60, type: 3}
   trigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!212 &212931948644974362
