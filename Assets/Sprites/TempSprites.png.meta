@@ -5,6 +5,7 @@ TextureImporter:
     21300000: LeaverOff
     21300002: TempSprites_1
     21300004: LeaverOn
+    21300006: Barrier
   externalObjects: {}
   serializedVersion: 5
   mipmaps:
@@ -175,6 +176,26 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fb69780051d419c4ab7a6af7daa5ea53
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Barrier
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1733
+        width: 224
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b41617c3b3e50b4d97e1dd4c139c6d3
       vertices: []
       indices: 
       edges: []

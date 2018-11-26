@@ -9,6 +9,7 @@ TagManager:
   - StartPos
   - PressureItem
   - LevelManger
+  - Obstacle
   layers:
   - Default
   - TransparentFX

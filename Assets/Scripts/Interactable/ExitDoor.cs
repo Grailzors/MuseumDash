@@ -7,14 +7,6 @@ public class ExitDoor : MonoBehaviour {
     [Header("Door Requirments")]
     public List<GameObject> requiredKeys;
 
-    private bool gotKeys;
-
-
-    private void Start()
-    {
-        gotKeys = false;    
-    }
-
 
     private void OnDrawGizmos()
     {
@@ -24,7 +16,10 @@ public class ExitDoor : MonoBehaviour {
         foreach(GameObject k in requiredKeys)
         {
             Gizmos.color = new Color(0f, 0f, 1f);
-            Gizmos.DrawLine(transform.position, k.transform.position);
+            if (k != null)
+            {
+                Gizmos.DrawLine(transform.position, k.transform.position);
+            }
         }
     }
 
@@ -57,7 +52,6 @@ public class ExitDoor : MonoBehaviour {
         if (num == requiredKeys.Count)
         {
             print("All Keys Collected");
-            gotKeys = true;
             LevelManger.complete = true;
             GameManager.LoadNextLevel();
         }

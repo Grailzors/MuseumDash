@@ -17,7 +17,7 @@ public class LeaverController : MonoBehaviour {
     {
         Gizmos.color = Color.cyan;
 
-        for (int i = 0; i < trigger.GetPersistentEventCount(); i++)
+        for (int i = 0; i < trigger.GetPersistentEventCount() - 1; i++)
         {
             GameObject obj = GameObject.Find(trigger.GetPersistentTarget(i).name);
             if (obj != null)

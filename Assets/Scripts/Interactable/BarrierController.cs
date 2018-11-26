@@ -9,6 +9,7 @@ public class BarrierController : MonoBehaviour {
     public SwitcherController switcher;
     public bool isSwitch;
 
+
     private void Awake()
     {
         isSwitch = false;

@@ -14,7 +14,7 @@ public class LevelDescription : ScriptableObject {
     public Dialogue[] dialogue;
 
     [Header("Camera Controls")]
-    public int camSize;
+    public float camSize;
 }
 
 

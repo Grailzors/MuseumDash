@@ -15,6 +15,6 @@ MonoBehaviour:
   mainCam: {fileID: 20526528682149392, guid: b456c2911a70db1459d6ccafe417c248, type: 2}
   timeLimit:
     min: 0
-    sec: 40
+    sec: 12
   dialogue: []
-  camSize: 10
+  camSize: 3.5
