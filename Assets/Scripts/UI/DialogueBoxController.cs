@@ -15,6 +15,11 @@ public class DialogueBoxController : MonoBehaviour {
     {
         dName.text = " ";
         dDialogue.text = " ";
+
+        if (LevelManger.dialogue.Length == 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void CycleDialogue()

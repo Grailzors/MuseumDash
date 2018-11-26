@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5827370b70b16ec428631eea98a53c12, type: 3}
+  m_Name: TestLevel4
+  m_EditorClassIdentifier: 
+  player: {fileID: 1458922225626030, guid: 4ddbb63413f741f469fb10d34da1deb8, type: 2}
+  mainCam: {fileID: 20526528682149392, guid: b456c2911a70db1459d6ccafe417c248, type: 2}
+  timeLimit:
+    min: 0
+    sec: 12
+  dialogue: []
+  camSize: 10
