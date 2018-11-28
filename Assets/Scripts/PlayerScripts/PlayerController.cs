@@ -73,20 +73,6 @@ public class PlayerController : MonoBehaviour {
         //ResetPlayer();
     }
 
-    void Update ()
-    {
-        //print(isCarrying);
-
-        if (inventory.Count > 0)
-        {
-            for (int i = 0; i < inventory.Count; i++)
-            {
-                PickUp obj = inventory[i].GetComponent<PickUp>();
-                //print(obj.pickupName + " " + obj.pickupNumCode + " " + obj.pickupType + " " + obj.pickupColor);
-            }
-        }
-    }
-
     private void LateUpdate()
     {
         PlayerInteract();

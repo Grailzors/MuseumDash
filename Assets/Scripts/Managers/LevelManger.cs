@@ -13,7 +13,6 @@ public class LevelManger : MonoBehaviour
     public Camera mainCam;
     public Transform startPos;
     [Space]
-    [SerializeField]
     public float countDownSpeed = 1;
 
     public static Dialogue[] dialogue;
@@ -22,14 +21,12 @@ public class LevelManger : MonoBehaviour
     public static bool faild = false;
     public static string timerText;
 
-    private bool isTrigger = false;
-    private float origTimeLimit;
+    //private readonly bool isTrigger = false;
 
 
     private void Start()
     {        
         timeLimit = (ld.timeLimit.min * 60) + ld.timeLimit.sec;
-        origTimeLimit = timeLimit;
         dialogue = ld.dialogue;
         player = ld.player;
         mainCam = ld.mainCam;

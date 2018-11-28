@@ -7,17 +7,19 @@ public class PickUp : MonoBehaviour {
     public PickUpData pickupDetails;
 
     private readonly GameObject player;
-    private Vector3 offset;
 
+    //private Vector3 offset;
+    /*
     private void Start()
     {
-        offset = transform.position - (transform.position + new Vector3(-1f, -1f, 0f));
+        //offset = transform.position - (transform.position + new Vector3(-1f, -1f, 0f));
     }
 
     private void Update()
     {
         //CarryCreate();
     }
+    */
 
     private void OnDrawGizmos()
     {
