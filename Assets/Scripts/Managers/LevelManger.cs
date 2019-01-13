@@ -21,7 +21,8 @@ public class LevelManger : MonoBehaviour
     public static bool faild = false;
     public static string timerText;
 
-    //private readonly bool isTrigger = false;
+    //private bool isTrigger = false;
+    private float origTimeLimit;
 
 
     private void Start()
